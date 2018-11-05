@@ -1,0 +1,29 @@
+{
+  "name": "reddit-project",
+  "version": "1.0.0",
+  "description": "A cloning version of reddit built on express and node",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zamy97/Reddit-Project.git"
+  },
+  "keywords": [
+    "Reddit",
+    "NodeJS",
+    "express",
+    "handlebars"
+  ],
+  "author": "Aktar Zaman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zamy97/Reddit-Project/issues"
+  },
+  "homepage": "https://github.com/Zamy97/Reddit-Project#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0"
+  }
+}
