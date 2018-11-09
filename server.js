@@ -29,10 +29,6 @@ app.get('/posts/new', function(req, res) {
     res.render('posts-new')
 });
 posts(app)
-// Alls the posts route
-// app.post('/posts/new', function(req, res){
-//     res.redirect('/posts')
-// });
 
 // All posts route here
 app.get('/posts', function(req, res){
@@ -46,6 +42,18 @@ app.get('/posts', function(req, res){
     // res.render('all_posts')
 });
 
+// SUBREDDIT
+app.get("/n/:subreddit", function(req, res) {
+    Post.find({ subreddit: req.params.subreddit })
+    .then(posts => {
+        res.render("all_posts", { posts });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+    console.log(req.params.subreddit);
+});
+
 app.listen(3000);
 
 // Links I have Looked at
@@ -53,3 +61,4 @@ app.listen(3000);
 // https://stackoverflow.com/questions/27202075/expressjs-res-redirect-not-working-as-expected?noredirect=1&lq=1
 // https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction
 // https://www.sitepoint.com/hierarchical-data-database-2/
+// https://stackoverflow.com/questions/13066532/how-to-uninstall-npm-modules-in-node-js
