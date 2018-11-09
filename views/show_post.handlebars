@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
 <body>
     <div class="row">
         <div class = "col-sm-6 col-sm-offset-3">
@@ -9,5 +5,10 @@
             <p>{{post.summary}}</p>
         </div>
     </div>
+    <form action="/posts/{{post._id}}/comments" method="post">
+        <textarea class='form-control' name="content" placeholder="Comment"></textarea>
+        <div class="text-right">
+            <button type="submit">Save</button>
+        </div>
+    </form>
 </body>
-</html>

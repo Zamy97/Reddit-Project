@@ -1,6 +1,7 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 var posts = require('./controllers/posts.js');
+var comments = require('./controllers/comments-controller.js')
 var bodyParser = require('body-parser')
 // Set db
 var database = require('./data/reddit-db');
@@ -28,7 +29,10 @@ app.get('/', function(req, res) {
 app.get('/posts/new', function(req, res) {
     res.render('posts-new')
 });
+
+// Don't know what these are doing here
 posts(app)
+comments(app)
 
 // All posts route here
 app.get('/posts', function(req, res){
@@ -53,6 +57,7 @@ app.get("/n/:subreddit", function(req, res) {
     });
     console.log(req.params.subreddit);
 });
+
 
 app.listen(3000);
 
