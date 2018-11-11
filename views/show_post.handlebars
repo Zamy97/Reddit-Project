@@ -11,4 +11,7 @@
             <button type="submit">Save</button>
         </div>
     </form>
+    {{#each post.comments}}
+        <p>{{this.content}}</p>
+    {{/each}}
 </body>

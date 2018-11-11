@@ -18,7 +18,7 @@ module.exports = function(app) {
             .then(post => {
                 res.redirect('/')
             })
-            // 
+            //
             //     // REDIRECT TO THE ROOT
             //     return res.redirect('/posts');
             // })
