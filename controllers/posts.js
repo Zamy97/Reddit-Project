@@ -2,6 +2,25 @@ const Post = require("../models/post.js");
 
 
 module.exports = app => {
+
+    var post = new Post(req.body);
+    post.author = req.user._id;
+
+    post
+
+        .save()
+        .then(post => {
+            return User.findById(req.user._id);
+        })
+        .then(user => {
+            user.posts.unshift(post);
+            user.save();
+            // REDIRECT TO THE NEW POST
+            res.redirect("/posts/" + post._id);
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
     // CREATE
     app.post("/posts/new", (req, res) => {
         //INSTANTIATE INSTANCE OF POST MODEL
