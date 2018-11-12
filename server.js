@@ -6,6 +6,8 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+
+
 // Set db
 var database = require('./data/reddit-db');
 const Post = require('./models/post')
@@ -13,9 +15,22 @@ const Post = require('./models/post')
 // express initialize
 var app = express()
 
+var checkAuth = (req, res, next) => {
+    console.log("Checking Authentication");
+    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+        res.user = null;
+    } else {
+        var token = req.cookies.nToekn;
+        var decodedToken = jwt.decode(token, { complete: true}) || {};
+        req.user = decodedToken.payload;
+    }
+    next();
+};
+
+app.use(checkAuth);
+
 // cookieParser middleware
 app.use(cookieParser());
-
 
 
 // create application/json parser
