@@ -1,5 +1,7 @@
 <body>
+    {{#if currentUser}}
     <a href="/posts/new" class="btn btn-primary navbar-btn text-center">New Post</a>
+    {{/if}}
 <div class="row">
   <div class="col-sm-4 col-sm-offset-4">
     <form action="/posts/new" method="post">
@@ -23,7 +25,7 @@
             <label for="post-subreddit">Subreddit</label>
             <input name="subreddit" type="text" class="form-control" id="post-subreddit" placeholder="Subreddit">
         </div>
-        
+
         <div class='text-center'>
             <button type="submit" class="btn btn-primary">Create Post</button>
         </div>

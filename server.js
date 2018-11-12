@@ -46,6 +46,15 @@ app.set('view engine', 'handlebars');
 
 // Home route
 app.get('/', function(req, res) {
+    var currentUser = req.user;
+
+    Post.find({})
+        .then(posts => {
+            res.render("all_posts", { posts, currentUser });
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
     res.render('home')
 });
 
@@ -60,6 +69,16 @@ comments(app)
 
 // All posts route here
 app.get('/posts', function(req, res){
+    if (req.user) {
+        var post = new Post(req.body);
+
+        post.save(function(err, post) {
+            return res.redirect('/')
+        });
+    } else {
+        return res.status(401); // UNAUTHORIZEd
+    }
+});
     Post.find({})
   .then(posts => {
     res.render("all_posts", { posts });
