@@ -3,11 +3,20 @@ var exphbs = require('express-handlebars');
 var posts = require('./controllers/posts.js');
 var comments = require('./controllers/comments-controller.js')
 var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+
 // Set db
 var database = require('./data/reddit-db');
 const Post = require('./models/post')
 
+// express initialize
 var app = express()
+
+// cookieParser middleware
+app.use(cookieParser());
+
+
 
 // create application/json parser
 app.use(bodyParser.json());
