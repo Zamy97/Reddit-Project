@@ -18,7 +18,35 @@ module.exports = (app) => {
         res.render('login');
     });
 
-    app.post("/login", (req, res))
+    app.post("/login", (req, res) => {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        // Find this user name
+        User.findOne({ username }, "username password")
+            .then(user => {
+                if (!user) {
+                    // User not found
+                    return res.status(401).send({ message: "Wrong Username or Password"});
+                }
+                // Check the password
+                user.comparePassword(password, (err, isMatch) => {
+                    if (!isMatch) {
+                        // PAssword Does not match
+                        return res.status(401).send({ message: "Wrong Username or Password" });
+                    }
+                    //Create a token
+                    const token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, {
+                    });
+                    // SET a cookie and redirect to root
+                    res.cookie("nToken", token, { maxAge: 90000, httpOnly: true });
+                    res.redirect("/");
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    });
 
 
 
