@@ -6,8 +6,6 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
-
-
 // Set db
 var database = require('./data/reddit-db');
 const Post = require('./models/post')
