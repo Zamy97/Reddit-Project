@@ -7,7 +7,6 @@ module.exports = app => {
     post.author = req.user._id;
 
     post
-
         .save()
         .then(post => {
             return User.findById(req.user._id);
@@ -21,6 +20,8 @@ module.exports = app => {
         .catch(err => {
             console.log(err.message);
         });
+
+
     // CREATE
     app.post("/posts/new", (req, res) => {
         //INSTANTIATE INSTANCE OF POST MODEL
