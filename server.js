@@ -48,7 +48,7 @@ app.get('/', function(req, res) {
 
     Post.find({})
         .then(posts => {
-            res.render("all_posts", { posts, currentUser });
+            res.render("all-posts", { posts, currentUser });
         })
         .catch(err => {
             console.log(err.message);
@@ -79,7 +79,7 @@ app.get('/posts', function(req, res){
 });
     Post.find({})
   .then(posts => {
-    res.render("all_posts", { posts });
+    res.render("all-posts", { posts });
   })
   .catch(err => {
     console.log(err.message);
@@ -91,7 +91,7 @@ app.get('/posts', function(req, res){
 app.get("/n/:subreddit", function(req, res) {
     Post.find({ subreddit: req.params.subreddit })
     .then(posts => {
-        res.render("all_posts", { posts });
+        res.render("all-posts", { posts });
     })
     .catch(err => {
         console.log(err);

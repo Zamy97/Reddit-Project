@@ -38,7 +38,7 @@ module.exports = app => {
     app.get("/posts/:id", function(req, res) {
         //LOOK UP THE POST
         Post.findById(req.params.id).populate('comments').then((post) => {
-            res.render('show_post', { post })
+            res.render('show-post', { post })
         }).catch(err => {
             console.log(err.message);
         });
