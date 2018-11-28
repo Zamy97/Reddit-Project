@@ -5,6 +5,7 @@ var comments = require('./controllers/comments-controller.js')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const auth = require('./controllers/auth.js')
 
 // Set db
 var database = require('./data/reddit-db');
@@ -64,6 +65,7 @@ app.get('/posts/new', function(req, res) {
 // Don't know what these are doing here
 posts(app)
 comments(app)
+auth(app)
 
 // All posts route here
 app.get('/posts', function(req, res){
