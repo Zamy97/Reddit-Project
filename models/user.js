@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     posts : [{ type: Schema.Types.ObjectId, ref: "Post" }]
 });
 
-// Define the callback with a regualar function to avoit problems with this
+// Define the callback with a regualar function to avoid problems with this
 UserSchema.pre("save", function(next) {
     // SET createdAt and updatedAt
     const now = new Date();

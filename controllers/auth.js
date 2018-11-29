@@ -1,11 +1,11 @@
-const User = require("../models/user");
+const User = require("../models/user.js");
 const jwt = require('jsonwebtoken');
 
 module.exports = (app) => {
     // SIGN UP FORM
     app.get("/sign-up", (req, res) => {
         res.render("sign-up")
-    })
+    });
 
     //LOGOUT
     app.get('/logout', (req, res) => {

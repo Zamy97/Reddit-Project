@@ -25,37 +25,50 @@ module.exports = app => {
     });
 
 
-    var post = new Post(req.body);
-    post.author = req.user._id;
-
-    post
-        .save()
-        .then(post => {
-            return User.findById(req.user._id);
-        })
-        .then(user => {
-            user.posts.unshift(post);
-            user.save();
-            // REDIRECT TO THE NEW POST
-            res.redirect("/posts/" + post._id);
-        })
-        .catch(err => {
-            console.log(err.message);
-        });
+    // var post = new Post(req.body);
+    // post.author = req.user._id;
+    //
+    // post
+    //     .save()
+    //     .then(post => {
+    //         return User.findById(req.user._id);
+    //     })
+    //     .then(user => {
+    //         user.posts.unshift(post);
+    //         user.save();
+    //         // REDIRECT TO THE NEW POST
+    //         res.redirect("/posts/" + post._id);
+    //     })
+    //     .catch(err => {
+    //         console.log(err.message);
+    //     });
 
 
     // CREATE
-    app.post("/posts/new", (req, res) => {
-        //INSTANTIATE INSTANCE OF POST MODEL
+    app.post('/posts', (req, res) => {
+        if (req.user) {///initiates instance of Post model
         const post = new Post(req.body);
-
-        //SAVE INSTANCE OF POST MODEL TO DB
+        console.log('in IF Block -------> ')
+        post.author = req.user._id
+        //SAVE Post model to db
         post.save((err, post) => {
-            // REDIRECT TO THE ROOT
-            return  res.redirect('/posts');
+            return User.findById(req.user._id).then((user) => {
+                user.posts.unshift(post);
+                console.log('In THEN Block ...');
+                user.save();
+                //redirect to the post
+                res.redirect('/posts/' + post._id)
+            }).catch(err => {
+                console.log('in CATCH block ...')
+                console.log(err.message);
+            })
         })
-        console.log(req.body);
-    });
+    } else {
+        console.log('In ELSE Block ------>');
+        return res.status(401).send('You need to be logged in to do that.');
+
+    }
+})
 
     app.get("/posts/:id", function(req, res) {
         //LOOK UP THE POST
