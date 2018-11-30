@@ -1,4 +1,34 @@
-<body>
+<h1> Create a post </h1>
+
+
+<form action="/posts" method="post">
+
+    <div class="jumbotron">
+        <div class="row">
+        </div>
+        <div class="form-group">
+            <label for="post-title">Title</label>
+            <input type="text" name="title" class="form-control" id="post-title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="post-url">Url</label>
+            <input type="url" name="url" class="form-control" id="post-url" placeholder="i.e. https://www.google.com (optional)">
+        </div>
+        <div class="form-group">
+            <label for="post-summary">Summary</label>
+            <textarea name="summary" class="form-control" id="post-summary" placeholder="Summary"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="subreddit">Subreddit</label>
+            <input type="text" name="subreddit" class="form-control" id="subreddit" placeholder="Subreddit">
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+
+    </div>
+</form>
+
+
+<!-- <body>
     {{#if currentUser}}
     <a href="/posts/new" class="btn btn-primary navbar-btn text-center">New Post</a>
     {{/if}}
@@ -32,4 +62,4 @@
     </form>
   </div>
 </div>
-</body>
+</body> -->
