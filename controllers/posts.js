@@ -6,25 +6,45 @@ const User = require('../models/user')
 module.exports = app => {
 
     app.put("/posts/:id/vote-up", function(req, res) {
-        Post.findById(req.params.id).exec(function(err, post) {
-            post.upVotes.push(req.params.id);
-            post.voteScore = post.voteTotal + 1;
-            post.save();
-
-            res.status(200);
-        });
+            Post.findById(req.params.id).then(post => {
+                post.upVotes.push(req.user._id);
+                post.voteScore = post.voteScore + 1;
+                return post.save();
+            }).then(post => {
+                return res.sendStatus(200);
+            }).catch(err => {
+                console.log(err.message);
+            })
+        } else {
+            res.sendStatus(401).send("You gotta sign in man")
+        }
     });
 
 
     app.put("/posts/:id/vote-down", function(req, res) {
-        Post.findById(req.params.id).exec(function(err, post) {
-            post.downVotes.push(req.user._id);
-            post.voteScore = post.voteTotal - 1;
-            post.save();
-
-            res.status(200);
-        });
+        if(req.user) {
+            Post.findById(req.params.id).then(post => {
+                post.downVotes.push(req.user._id);
+                post.voteScore = post.voteScore - 1
+                return post.save();
+            }).then(post => {
+                return res.sendStatus(200);
+            }).catch(err => {
+                console.log(err.message);
+            })
+        } else {
+            res.sendStatus(401).send("You need to be signed up")
+        }
     });
+    
+    //     Post.findById(req.params.id).exec(function(err, post) {
+    //         post.downVotes.push(req.user._id);
+    //         post.voteScore = post.voteTotal - 1;
+    //         post.save();
+    //
+    //         res.status(200);
+    //     });
+    // });
 
 
     // var post = new Post(req.body);
