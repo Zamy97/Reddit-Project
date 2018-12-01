@@ -36,7 +36,7 @@ module.exports = app => {
             res.sendStatus(401).send("You need to be signed up")
         }
     });
-    
+
     //     Post.findById(req.params.id).exec(function(err, post) {
     //         post.downVotes.push(req.user._id);
     //         post.voteScore = post.voteTotal - 1;
@@ -46,25 +46,70 @@ module.exports = app => {
     //     });
     // });
 
+// Get Routes
 
-    // var post = new Post(req.body);
-    // post.author = req.user._id;
-    //
-    // post
-    //     .save()
-    //     .then(post => {
-    //         return User.findById(req.user._id);
-    //     })
-    //     .then(user => {
-    //         user.posts.unshift(post);
-    //         user.save();
-    //         // REDIRECT TO THE NEW POST
-    //         res.redirect("/posts/" + post._id);
-    //     })
-    //     .catch(err => {
-    //         console.log(err.message);
-    //     });
+    app.get('/', (req, res) => {
+        const currentUser = req.user;
+        Post.find({}).then((posts) => {
+            console.log("Current User" + currentUser);
+            res.render('all-posts', { posts: posts, currentUser: currentUser})
+        }).catch(err => {
+            console.log(err.message);
+        })
+    })
 
+    app.get('/n/:subreddit', function(req, res) {
+        const currentUser = req.user;
+        Post.find({ subreddit: req.params.subreddit }).then((posts) => {
+            res.render('all-posts', { posts, currentUser })
+        }).catch((err) => {
+            console.log(err.message);
+        })
+    });
+
+    app.post('/n/:subreddit', function(req, res) {
+        Post.find({ subreddit: req.params.subreddit}).then((posts) => {
+            res.render('all-posts', { posts })
+        }).catch(err => {
+            console.log(err.message);
+        })
+    });
+
+    app.get('/posts/new', (req, res) => {
+        res.render('posts-new');
+    });
+
+    app.get('/posts/:id', (req, res) => {
+
+        const currentUser = req.user;
+        //Find the post
+        Post.findById(req.params.id).populate('author').populate({
+            path: 'comments',
+            populate: {
+                path: 'author'
+            }
+        }).populate({
+            path: 'comments',
+            populate: {
+                path: 'comments',
+                populate: {
+                    path: 'author'
+                }
+            }
+        }).populate({
+            path: 'comments',
+            populate: {
+                path: 'comments',
+                populate: {
+                    path: 'author'
+                }
+            }
+        }).then(post => {
+            res.render('posts-show', { post, currentUser })
+        }).catch(err => {
+            console.log(err.message);
+        })
+    })
 
     // CREATE
     app.post('/posts', (req, res) => {
@@ -90,16 +135,7 @@ module.exports = app => {
         return res.status(401).send('You need to be logged in to do that.');
 
     }
-})
-
-    app.get("/posts/:id", function(req, res) {
-        //LOOK UP THE POST
-        Post.findById(req.params.id).populate('comments').then((post) => {
-            res.render('show-post', { post })
-        }).catch(err => {
-            console.log(err.message);
-        });
-    });
+    })
 };
 
 // .then(post => {
