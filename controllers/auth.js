@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 module.exports = (app) => {
     // SIGN UP FORM
     app.get("/sign-up", (req, res) => {
-        res.render("sign-up.hbs")
+        res.render("sign-up")
     });
 
     //LOGOUT

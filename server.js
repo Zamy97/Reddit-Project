@@ -10,7 +10,7 @@ const Post = require('./models/post')
 const commentsController = require('./controllers/comments.js');
 const authController = require('./controllers/auth.js');
 const bcrypt = require('bcrypt');
-const port = 9000
+const port = 3000
 
 // initiates express
 const app = express()
