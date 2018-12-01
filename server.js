@@ -6,10 +6,10 @@ const dotenv = require('dotenv').config();
 const postsController = require('./controllers/posts');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const post = require('./models/post')
+const Post = require('./models/post')
 const commentsController = require('./controllers/comments.js');
 const authController = require('./controllers/auth.js');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const port = 9000
 
 // initiates express
@@ -45,7 +45,7 @@ commentsController(app);
 authController(app);
 
 app.listen(port, () => {
-    console.log("Server running on port ${port}!")
+    console.log(`Server running on port ${port}!`)
 });
 
 module.exports = app;
