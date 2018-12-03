@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/reddit_project', {useNewUrlParser: true});
+
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
