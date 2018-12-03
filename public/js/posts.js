@@ -2,10 +2,10 @@ $(document).ready(function() {
     $(".vote-up").submit(function(e) {
         e.preventDefault();
 
-        var postId = $(this).data("id");
+        let postId = $(this).data("id");
         $.ajax({
             type: "PUT",
-            url: "posts/" + postId + "/vote-up",
+            url: `/posts/${postId}/vote-up`,
             success: function(data) {
                 console.log("voted up!");
             },
@@ -18,10 +18,10 @@ $(document).ready(function() {
     $(".vote-down").submit(function(e) {
         e.preventDefault();
 
-        var postId = $(this).data("id");
+        let postId = $(this).data("id");
         $.ajax({
             type: "PUT",
-            url: "posts/" + postId + "/vote-down",
+            url: `/posts/${postId}/vote-down`,
             success: function(data) {
                 console.log("Voted down");
             },

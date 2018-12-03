@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const exphbs = require('express-handlebars');
 const dotenv = require('dotenv').config();
+const port = process.env.PORT || 4000
 const postsController = require('./controllers/posts');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,13 +11,15 @@ const Post = require('./models/post')
 const commentsController = require('./controllers/comments.js');
 const authController = require('./controllers/auth.js');
 const bcrypt = require('bcrypt');
-const port = 3000
+
 
 // initiates express
 const app = express()
 
 // Cookie Parser set up
 app.use(cookieParser());
+
+mongoose.promise = global.promise
 
 // Checking Authentication middleware
 const checkAuth = (req, res, next) => {
@@ -25,8 +28,7 @@ const checkAuth = (req, res, next) => {
         res.user = null;
     } else {
         const token = req.cookies.Token;
-        const decodedToken = jwt.decode(token, {
-        complete: true}) || {};
+        const decodedToken = jwt.decode(token, { complete: true}) || {};
         req.user = decodedToken.payload;
     }
     next();
@@ -45,7 +47,7 @@ commentsController(app);
 authController(app);
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}!`)
+    console.log(`Server running on port ${port}!`);
 });
 
 module.exports = app;

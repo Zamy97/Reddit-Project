@@ -1,0 +1,111 @@
+body {
+    margin-left: 15px;
+}
+
+nav {
+    margin-left: 25px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.title-link {
+    color: black;
+}
+
+
+.comment-indent {
+    margin-left: 16px;
+}
+
+
+.first-child-comment {
+    margin-left: 24px;
+
+}
+
+.second-child-comment {
+    margin-left: 32px;
+}
+
+
+/*====================
+--Post Index Section----
+=========================*/
+
+.list-group-item {
+    margin-bottom: 16px;
+    margin-top: 16px;
+
+
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.downvote {
+    background-color: red;
+    transition: all 200ms;
+}
+.downvote:hover {
+    background-color: red;
+    opacity: 0.7;
+
+}
+
+.upvote {
+    background-color: green;
+    transition: all 200ms;
+}
+
+.upvote:hover {
+    background-color: green;
+    opacity: 0.7;
+}
+
+
+
+
+
+/*--------------------------------
+--------------POSTS-SHOW SECTION-------
+-----------------------------------*/
+
+.voting-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+}
+
+.show-upvote {
+    margin-right: 16px;
+    background-color: green;
+    transition: all 200ms;
+}
+
+.show-upvote:hover {
+    opacity: 0.7;
+    background-color: green;
+}
+.show-downvote {
+    background-color: red;
+    transition: all 200ms;
+}
+
+.show-downvote:hover {
+    background-color: red;
+    opacity: 0.7;
+}
+
+.reply-header {
+    margin-bottom: 32px;
+    margin-top: 16px;
+}
