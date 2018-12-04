@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const Post = require('./models/post')
 const commentsController = require('./controllers/comments.js');
 const authController = require('./controllers/auth.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 // initiates express
@@ -24,8 +24,8 @@ mongoose.promise = global.promise
 // Checking Authentication middleware
 const checkAuth = (req, res, next) => {
     console.log("Checking user's Authentication");
-    if (typeof req.cookies.Token === "undefined" || res.cookies.Token === null) {
-        res.user = null;
+    if (typeof req.cookies.Token === "undefined" || req.cookies.Token === null) {
+        req.user = null;
     } else {
         const token = req.cookies.Token;
         const decodedToken = jwt.decode(token, { complete: true}) || {};

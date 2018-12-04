@@ -42,11 +42,11 @@ app.put('/posts/:id/vote-down', (req, res) => {
         const currentUser = req.user;
         Post.find({}).then((posts) => {
             console.log('this is the current user -----> ' + currentUser)
-            res.render('all-posts', {posts: posts, currentUser: currentUser})
+            res.render('all-posts', { posts: posts, currentUser: currentUser})
         }).catch(err => {
             console.log(err.message);
         })
-    })
+    });
 
 //////GET
 app.get('/n/:subreddit', function(req, res) {

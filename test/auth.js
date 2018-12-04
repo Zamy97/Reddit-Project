@@ -25,7 +25,7 @@ describe("User", function() {
                 .end(function(err, res) {
                 console.log(res.body);
                 res.should.have.status(200);
-                res.should.have.cookie("nToken");
+                res.should.have.cookie("Token");
                 done();
                 });
         });
@@ -36,7 +36,7 @@ describe("User", function() {
     it("should be able to logout", done => {
         agent.get("/logout").end(function(err, res) {
             res.should.have.status(200);
-            res.should.not.have.cookie("nToken");
+            res.should.not.have.cookie("Token");
             done();
         });
     });

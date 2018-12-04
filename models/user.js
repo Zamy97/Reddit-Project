@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/reddit_project', {useNewUrlParser: true});
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 
